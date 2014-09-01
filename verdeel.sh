@@ -2,15 +2,14 @@
 
 # ---------------------- configuratie ------------------------#
 
-BBUSER=s0620866
-BBCOURSEID=91125
+BBUSER=s4119444
+BBCOURSEID=95213
 
 declare -A email
-email[marc]="mschool@science.ru.nl"
-email[ko]="kostoffelen@student.ru.nl"
-email[pol]="p.vanaubel@student.science.ru.nl"
+email[thom]="os@thomwiggers.nl"
+email[bas]="steegbas@gmail.com"
 
-SUBJECT="1314 Functioneel Programmeren (NWI-IBC006-2013-KW1-V):"
+SUBJECT="1415 Operating Systems (NWI-IBC019-2014-KW1-V):"
 
 # ---------------------- end of config -----------------------#
 
@@ -66,8 +65,8 @@ echo Trying to adjust for student creativity.
 antifmt.sh
 
 echo 
-echo Trial compilation
-trialc.sh [sez][0-9]*    # reminder: this also matches 's0abc' etc.
+#echo Trial compilation
+#trialc.sh [sez][0-9]*    # reminder: this also matches 's0abc' etc.
 
 echo Groupcheck 
 groepjes.sh [sez][0-9]* | grep "<with>" || true
@@ -77,7 +76,7 @@ echo Balancing workload
 
 hak2.sh "${!email[@]}" 
 
-humor=$(iching.sh)
+humor=$(boeket.sh)
 for ta in "${!email[@]}"
 do
     cp grades.csv "$ta"
@@ -100,8 +99,8 @@ PREFIX="$SUBJECT"
 	pkt="$ta-${zip%.zip}.7z"
 	7za a -ms=on -mx=9 "$pkt" "$ta" > /dev/null
 	#echo "$humor" | mailx -n -s "${SUBJECT} ${zip%.zip}" -a "$pkt" "${email[$ta]}" 
-	echo "$humor" | mutt -s "${SUBJECT} ${zip%.zip}" -a "$pkt" -- "${email[$ta]}" 
-	rm -f "$pkt"
+	#echo "$humor" | mutt -s "${SUBJECT} ${zip%.zip}" -a "$pkt" -- "${email[$ta]}"
+	#rm -f "$pkt"
     fi
 done
 

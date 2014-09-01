@@ -42,27 +42,27 @@ done
 
 # correct msdos/mac line endings
 #echo Converting Mac/MSDOS line-endings
-#perl -pi -e 's/\r\n?/\n/g' ${STUDDIRS}/*.txt ${STUDDIRS}/*.[di]cl s/*.[Cc]*
+perl -pi -e 's/\r\n?/\n/g' ${STUDDIRS}/*.txt ${STUDDIRS}/*.[di]cl s/*.[Cc]*
 
 # unpdfize stuff
-echo Extracting text from PDF files \(`ls ${STUDDIRS}/*.pdf 2> /dev/null | wc -l`\)
-for file in ${STUDDIRS}/*.pdf; do
-	[ "$file" != "${STUDDIRS}/*.pdf" ] && pdftotext -layout "$file"
-done
+#echo Extracting text from PDF files \(`ls ${STUDDIRS}/*.pdf 2> /dev/null | wc -l`\)
+#for file in ${STUDDIRS}/*.pdf; do
+#	[ "$file" != "${STUDDIRS}/*.pdf" ] && pdftotext -layout "$file"
+#done
 
 # complain about word
-echo Bashing text out of Word files \(`ls ${STUDDIRS}/*.doc ${STUDDIRS}/*.rtf ${STUDDIRS}/*.docx ${STUDDIRS}/*.odt 2> /dev/null | wc -l`\)
-for doc in doc rtf; do
-    for file in ${STUDDIRS}/*.$doc; do
-	[ "$file" != "${STUDDIRS}/*.$doc" ] && $CATDOC "${file}" > "${file%%.$doc}".txt
-    done
-done
-for file in ${STUDDIRS}/*.docx; do
-	[ "$file" != "${STUDDIRS}/*.docx" ] && unzip -p "$file" word/document.xml | sed 's|<w:br/>|\n&|g;s|</w:p>|\n&|g;s|<[^>]*>||g' > "${file%%.docx}".txt
-done
-for file in ${STUDDIRS}/*.odt; do
-	[ "$file" != "${STUDDIRS}/*.odt" ] && unzip -p "$file" content.xml | sed 's|<text:tab/>|\t|g;s|<text:p|\n&|g;s|<[^>]*>||g' > "${file%%.odt}".txt
-done
+#echo Bashing text out of Word files \(`ls ${STUDDIRS}/*.doc ${STUDDIRS}/*.rtf ${STUDDIRS}/*.docx ${STUDDIRS}/*.odt 2> /dev/null | wc -l`\)
+#for doc in doc rtf; do
+#    for file in ${STUDDIRS}/*.$doc; do
+#	[ "$file" != "${STUDDIRS}/*.$doc" ] && $CATDOC "${file}" > "${file%%.$doc}".txt
+#    done
+#done
+#for file in ${STUDDIRS}/*.docx; do
+#	[ "$file" != "${STUDDIRS}/*.docx" ] && unzip -p "$file" word/document.xml | sed 's|<w:br/>|\n&|g;s|</w:p>|\n&|g;s|<[^>]*>||g' > "${file%%.docx}".txt
+#done
+#for file in ${STUDDIRS}/*.odt; do
+#	[ "$file" != "${STUDDIRS}/*.odt" ] && unzip -p "$file" content.xml | sed 's|<text:tab/>|\t|g;s|<text:p|\n&|g;s|<[^>]*>||g' > "${file%%.odt}".txt
+#done
 
 
 # kill all binaries
